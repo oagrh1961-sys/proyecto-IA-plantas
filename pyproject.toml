@@ -1,0 +1,32 @@
+[project]
+name = "proyecto-deteccion-plantas"
+version = "0.1.0"
+description = "Sistema de Visión Artificial para la Detección de Fitopatologías en Cultivos"
+readme = "README.md"
+authors = [{name = "Carlos Perez Varela"}]
+requires-python = ">=3.11"
+dependencies = [
+    "huggingface-hub>=0.20.0",
+    "pillow>=10.0.0",
+    "streamlit>=1.30.0",
+    "torch>=2.1.0",
+    "torchvision>=0.16.0",
+    "transformers>=4.35.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.2.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"] # Errores, Pyflakes e Isort (Clase 5)
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
