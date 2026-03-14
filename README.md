@@ -110,6 +110,35 @@ Esto iniciará:
 - Servidor gRPC en puerto 50051
 - Aplicación web en http://localhost:8501
 - Interfaz de MLflow en http://localhost:5000
+##  Línea de Tiempo del Proyecto
+
+### 📅 Evolución del Desarrollo
+
+| Fecha | Hito | Descripción |
+|-------|------|-------------|
+| **2026-03-14** | ✅ **Entrega Final Completa** | Arquitectura gRPC completa con MLflow tracking, Docker containerization, CLI limpio, pruebas unitarias y ejecuciones limpias |
+| **2026-03-14** | 🔧 **Arquitectura MLOps** | Implementación de servidor gRPC separado, cliente distribuido, tracking MLflow con métricas de latencia y errores |
+| **2026-03-14** | 🐳 **Containerización** | Configuración Docker completa con docker-compose, servicios orquestados y volúmenes optimizados |
+| **2026-03-14** | 🧪 **Calidad de Código** | Pruebas unitarias completas, logging configurable, ejecuciones limpias sin output innecesario |
+| **2026-03-14** | 📝 **Documentación** | README completo con instrucciones de instalación, uso, Docker y control de logging |
+| **2026-03-14** | 🚀 **Entrega Inicial** | Proyecto base con MobileNetV2, Streamlit UI y modelo entrenado funcional |
+
+### 📊 Métricas del Proyecto
+- **Arquitectura**: gRPC distribuida con Protocol Buffers
+- **Modelo**: MobileNetV2 fine-tuned para clasificación de enfermedades en plantas
+- **Cobertura de Pruebas**: 5/5 pruebas unitarias ✅
+- **Containerización**: Docker + Docker Compose ✅
+- **MLOps**: MLflow tracking con latencia y errores ✅
+- **Líneas de Código**: ~506 líneas agregadas en la evolución final
+
+### 🎯 Hitos Técnicos Alcanzados
+1. **Microservicios gRPC** - Separación clara entre servidor de inferencia y cliente UI
+2. **MLflow Integration** - Tracking completo de predicciones, latencia y errores
+3. **Docker Production-Ready** - Contenedores optimizados con healthchecks y volúmenes
+4. **CLI Tool** - Análisis de imágenes sin interfaz gráfica
+5. **Clean Code** - Logging configurable, pruebas unitarias, código linted
+6. **Documentación Completa** - Instrucciones para desarrollo y producción
+
 ##  Tablero Kanban
 El proyecto utiliza un tablero Kanban para la gestión ágil del desarrollo. Puedes acceder al tablero aquí: [GitHub Projects - Plant Disease Detection](https://trello.com/invite/proyectoia31/ATTIa0ebcc94e9d42792058f219cfc7aac1dED1F85E9}) 
 
