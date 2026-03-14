@@ -116,12 +116,12 @@ Esto iniciará:
 
 | Fecha | Hito | Descripción |
 |-------|------|-------------|
-| **2026-03-14** | Entrega Final Completa | Arquitectura gRPC completa con MLflow tracking, Docker containerization, CLI limpio, pruebas unitarias y ejecuciones limpias |
-| **2026-03-13** | Arquitectura MLOps | Implementación de servidor gRPC separado, cliente distribuido, tracking MLflow con métricas de latencia y errores |
-| **2026-03-12** | Containerización | Configuración Docker completa con docker-compose, servicios orquestados y volúmenes optimizados |
-| **2026-03-11** | Calidad de Código | Pruebas unitarias completas, logging configurable, ejecuciones limpias sin output innecesario |
-| **2026-03-10** | Documentación | README completo con instrucciones de instalación, uso, Docker y control de logging |
-| **2026-03-07** | Entrega Inicial | Proyecto base con MobileNetV2, Streamlit UI y modelo entrenado funcional |
+| **2026-10-14** | Entrega Final Completa | Arquitectura gRPC completa con MLflow tracking, Docker containerization, CLI limpio, pruebas unitarias y ejecuciones limpias |
+| **2026-10-13** | Arquitectura MLOps | Implementación de servidor gRPC separado, cliente distribuido, tracking MLflow con métricas de latencia y errores |
+| **2026-11-12** | Containerización | Configuración Docker completa con docker-compose, servicios orquestados y volúmenes optimizados |
+| **2026-13-11** | Calidad de Código | Pruebas unitarias completas, logging configurable, ejecuciones limpias sin output innecesario |
+| **2026-13-10** | Documentación | README completo con instrucciones de instalación, uso, Docker y control de logging |
+| **2026-13-07** | Entrega Inicial | Proyecto base con MobileNetV2, Streamlit UI y modelo entrenado funcional |
 
 ### 📊 Métricas del Proyecto
 - **Arquitectura**: gRPC distribuida con Protocol Buffers
