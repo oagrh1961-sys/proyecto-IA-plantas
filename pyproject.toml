@@ -7,9 +7,11 @@ authors = [{name = "Carlos Perez Varela"}]
 requires-python = ">=3.11"
 dependencies = [
     "grpcio>=1.60.0",
+    "grpcio-health-checking>=1.60.0",
     "grpcio-tools>=1.60.0",
     "huggingface-hub>=0.20.0",
     "mlflow>=2.10.0",
+    "openai>=1.0.0",
     "pillow>=10.0.0",
     "streamlit>=1.30.0",
     "torch>=2.1.0",
