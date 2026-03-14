@@ -1,0 +1,24 @@
+# Dockerfile para el servidor gRPC
+FROM python:3.11-slim
+
+# Instalar uv
+RUN pip install uv
+
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos de configuración
+COPY pyproject.toml uv.lock ./
+
+# Instalar dependencias
+RUN uv sync --frozen --no-install-project
+
+# Copiar código fuente
+COPY src/ ./src/
+COPY modelo_entrenado/ ./modelo_entrenado/
+
+# Exponer puerto gRPC
+EXPOSE 50051
+
+# Comando para ejecutar el servidor
+CMD ["uv", "run", "python", "src/server.py"]

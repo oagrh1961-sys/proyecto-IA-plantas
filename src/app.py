@@ -1,7 +1,11 @@
+import os
+
+import grpc
 import streamlit as st
-import torch
 from PIL import Image
-from transformers import MobileNetV2ForImageClassification, MobileNetV2ImageProcessor
+
+from image_classifier_pb2 import ImageRequest
+from image_classifier_pb2_grpc import ImageClassifierStub
 
 # 1. Diccionario de traducción (ajusta según las clases que veas en tu modelo)
 TRADUCCIONES = {
@@ -22,21 +26,32 @@ TRADUCCIONES = {
     "healthy": "Sana ✅",
 }
 
+
+class PlantDiseaseClient:
+    """Cliente gRPC para el servicio de clasificación de enfermedades en plantas."""
+
+    def __init__(self, host: str = None, port: int = None):
+        if host is None:
+            host = os.getenv("GRPC_SERVER_HOST", "localhost")
+        if port is None:
+            port = int(os.getenv("GRPC_SERVER_PORT", "50051"))
+        self.channel = grpc.insecure_channel(f"{host}:{port}")
+        self.stub = ImageClassifierStub(self.channel)
+
+    def classify_image(self, image_bytes: bytes) -> tuple[str, float]:
+        """Envía la imagen al servidor gRPC y recibe la predicción."""
+        request = ImageRequest(image=image_bytes)
+        response = self.stub.ClassifyImage(request)
+        return response.label, response.confidence
+
+
+# Inicializar cliente
+client = PlantDiseaseClient()
+
 st.set_page_config(page_title="Detector de Enfermedades", page_icon="🌿")
 
 st.title("🌿 Diagnóstico de Salud Vegetal")
 st.write("Sube una foto de la hoja para obtener un diagnóstico en español.")
-
-
-@st.cache_resource
-def load_model():
-    path = "./modelo_entrenado"
-    model = MobileNetV2ForImageClassification.from_pretrained(path)
-    processor = MobileNetV2ImageProcessor.from_pretrained(path)
-    return model, processor
-
-
-model, processor = load_model()
 
 uploaded_file = st.file_uploader(
     "Selecciona una imagen...", type=["jpg", "jpeg", "png"]
@@ -48,27 +63,33 @@ if uploaded_file is not None:
 
     if st.button("Iniciar Diagnóstico"):
         with st.spinner("Analizando tejido vegetal..."):
-            inputs = processor(images=image, return_tensors="pt")
-            with torch.no_grad():
-                outputs = model(**inputs)
-                logits = outputs.logits
-                predicted_label = logits.argmax(-1).item()
+            # Convertir imagen a bytes
+            from io import BytesIO
 
-            # Obtener etiqueta original
-            label_original = model.config.id2label[predicted_label]
+            buffer = BytesIO()
+            image.save(buffer, format="JPEG")
+            image_bytes = buffer.getvalue()
 
-            # Buscar traducción o dejar la original si no está en el diccionario
-            resultado_es = TRADUCCIONES.get(label_original, label_original)
+            # Enviar al servidor gRPC
+            try:
+                label_original, confidence = client.classify_image(image_bytes)
 
-            st.markdown("---")
-            st.subheader("Resultado del Análisis:")
-            st.success(f"**{resultado_es}**")
+                # Buscar traducción o dejar la original si no está en el diccionario
+                resultado_es = TRADUCCIONES.get(label_original, label_original)
 
-            # Recomendación rápida
-            if "sana" in resultado_es.lower() or "✅" in resultado_es:
-                st.balloons()
-                st.info("Sugerencia: Mantén el ciclo de riego actual.")
-            else:
-                st.warning(
-                    "Sugerencia: Aísla la planta y aplica un tratamiento fungicida."
-                )
+                st.markdown("---")
+                st.subheader("Resultado del Análisis:")
+                st.success(f"**{resultado_es}**")
+                st.info(f"Confianza: {confidence:.2%}")
+
+                # Recomendación rápida
+                if "sana" in resultado_es.lower() or "✅" in resultado_es:
+                    st.balloons()
+                    st.info("Sugerencia: Mantén el ciclo de riego actual.")
+                else:
+                    st.warning(
+                        "Sugerencia: Aísla la planta y aplica un tratamiento fungicida."
+                    )
+            except grpc.RpcError as e:
+                st.error(f"Error conectando al servidor: {e.details()}")
+                st.info("Asegúrate de que el servidor gRPC esté ejecutándose.")
