@@ -160,12 +160,54 @@ Si usas Docker:
 docker compose run --rm app python src/cli.py --image /path/to/mi_imagen.jpg
 ```
 
+## 🚀 CI/CD con GitLab y DigitalOcean
+
+El proyecto incluye un pipeline **CI/CD profesional** que automatiza:
+- ✅ Pruebas automáticas (pytest)
+- ✅ Construcción de imagen Docker
+- ✅ Despliegue automático a producción
+
+### 📚 Documentación Completa
+- **[CI_CD_GITLAB_DIGITALOCEAN.md](docs/CI_CD_GITLAB_DIGITALOCEAN.md)** - Guía paso a paso (Recomendado para empezar)
+- **[.gitlab-ci.yml](.gitlab-ci.yml)** - Pipeline YAML
+- **[VARIABLES_SECRETOS.md](docs/VARIABLES_SECRETOS.md)** - Gestión segura de credenciales
+- **[MAKEFILE_GUIDE.md](docs/MAKEFILE_GUIDE.md)** - Comandos disponibles
+- **[EMERGENCY_DEPLOYMENT.md](docs/EMERGENCY_DEPLOYMENT.md)** - Deployment manual y troubleshooting
+
+### ⚡ Inicio Rápido (5 minutos)
+```bash
+# 1. Crear archivo .env.example (sin secretos)
+cp config/.env config/.env.example
+
+# 2. Pushear a GitLab
+git push origin main
+
+# 3. Configurar variables en GitLab → Settings → CI/CD → Variables
+#   - DOCKER_USER
+# - DOCKER_PASSWORD
+#   - SERVER_HOST
+#   - SSH_PRIVATE_KEY
+
+# 4. GitLab ejecutará tests, build y deploy automáticamente
+```
+
+### 🏗️ Etapas del Pipeline
+```
+Test (pytest)
+   ↓
+Build (Docker)
+   ↓
+Deploy (DigitalOcean - Manual)
+```
+
+**Ver estado:** GitLab → Tu Proyecto → CI/CD → Pipelines
+
 ##  Docker
 El proyecto incluye configuración Docker para facilitar el despliegue:
 
 - `Dockerfile.server`: Contenedor para el servidor gRPC con el modelo ML.
 - `Dockerfile.app`: Contenedor para la aplicación Streamlit.
-- `docker-compose.yml`: Orquesta ambos servicios en una red compartida.
+- `config/docker-compose.yml`: Orquesta ambos servicios en una red compartida.
 
 ### Requisitos para Docker
 - Docker instalado y ejecutándose.
