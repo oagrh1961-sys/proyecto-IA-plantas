@@ -27,9 +27,10 @@ def main():
     with open(args.image, "rb") as f:
         image_bytes = f.read()
 
-    label, confidence = client.classify_image(image_bytes)
+    label, confidence, latency_ms = client.classify_image(image_bytes)
     print(f"Etiqueta: {label}")
     print(f"Confianza: {confidence:.2%}")
+    print(f"Latencia: {latency_ms:.2f}ms")
 
 
 if __name__ == "__main__":

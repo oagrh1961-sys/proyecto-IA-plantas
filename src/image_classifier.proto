@@ -13,4 +13,5 @@ message ImageRequest {
 message ImageResponse {
   string label = 1;
   float confidence = 2;
+  float latency_ms = 3;
 }

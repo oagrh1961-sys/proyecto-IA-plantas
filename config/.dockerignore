@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+.venv-1
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache
+.mypy_cache
+tests/
+
+# Docker
+Dockerfile*
+docker-compose.yml
+.docker
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Misc
+*.md
+*.txt
+!requirements.txt
+mlruns/
+mlflow.db
+.env.example
+README.md
+CONEXION_GUIDE.md
+MEJORAS_POSIBLES.md
+
+# Node (if using any frontend tools)
+node_modules/
+npm-debug.log
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
