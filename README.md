@@ -167,29 +167,19 @@ El proyecto incluye un pipeline **CI/CD profesional** que automatiza:
 - ✅ Construcción de imagen Docker
 - ✅ Despliegue automático a producción
 
+### � ¡NUEVO! Guía Rápida de Ejecución
+**→ [GUIA_RAPIDA_EJECUCION.md](GUIA_RAPIDA_EJECUCION.md)** ⭐ **(Comienza here - 20 minutos)**
+- 5 fases con instrucciones paso a paso
+- Script PowerShell automatizado
+- Migración GitHub → GitLab
+
 ### 📚 Documentación Completa
-- **[CI_CD_GITLAB_DIGITALOCEAN.md](docs/CI_CD_GITLAB_DIGITALOCEAN.md)** - Guía paso a paso (Recomendado para empezar)
-- **[.gitlab-ci.yml](.gitlab-ci.yml)** - Pipeline YAML
+- **[CI_CD_GITLAB_DIGITALOCEAN.md](docs/CI_CD_GITLAB_DIGITALOCEAN.md)** - Guía completa (6 secciones)
+- **[CONFIGURACION_VARIABLES_GITLAB.md](docs/CONFIGURACION_VARIABLES_GITLAB.md)** - Setup de variables de CI/CD
+- **[.gitlab-ci.yml](.gitlab-ci.yml)** - Pipeline YAML (3 stages)
 - **[VARIABLES_SECRETOS.md](docs/VARIABLES_SECRETOS.md)** - Gestión segura de credenciales
 - **[MAKEFILE_GUIDE.md](docs/MAKEFILE_GUIDE.md)** - Comandos disponibles
 - **[EMERGENCY_DEPLOYMENT.md](docs/EMERGENCY_DEPLOYMENT.md)** - Deployment manual y troubleshooting
-
-### ⚡ Inicio Rápido (5 minutos)
-```bash
-# 1. Crear archivo .env.example (sin secretos)
-cp config/.env config/.env.example
-
-# 2. Pushear a GitLab
-git push origin main
-
-# 3. Configurar variables en GitLab → Settings → CI/CD → Variables
-#   - DOCKER_USER
-# - DOCKER_PASSWORD
-#   - SERVER_HOST
-#   - SSH_PRIVATE_KEY
-
-# 4. GitLab ejecutará tests, build y deploy automáticamente
-```
 
 ### 🏗️ Etapas del Pipeline
 ```
